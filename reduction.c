@@ -146,7 +146,7 @@ static mpq_t *computeA(int n, int m, int l) {
   mpz_t bz;
   mpq_t b, tmp;
   mpz_init(bz);
-  mpq_inits(b, tmp, NULL);
+  mpq_inits(A[0], b, tmp, NULL);
   mpq_set_d(A[0], 1.0);
   for (int k = 1; k <= l; ++k) {
     mpq_init(A[k]);
