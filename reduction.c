@@ -25,14 +25,6 @@ static void transpose(int n, mpq_t *A) {
     }
 }
 
-static void add(int m, int n, mpq_t *A, mpq_t *B) {
-  for (int i = 0; i < m; ++i)
-    for (int j = 0; j < n; ++j) {
-      int index = i * n + j;
-      mpq_add(A[index], A[index], B[index]);
-    }
-}
-
 static mpq_t *multiply(int m, int r, int n, mpq_t *A, mpq_t *B) {
   mpq_t *C = (mpq_t *)malloc(m * n * sizeof(mpq_t));
   mpq_t tmp;
@@ -330,9 +322,10 @@ void reduction_matrix(int n, int m, int r, int s, double *Q) {
   mpq_t *D1 = computeD1(m, M, r, s);
   mpq_t *Q1 = computeQ1(m, n, r, s, A);
   mpq_t *Q2 = computeQ2(m, n, M, N, D1, L, E, D, C);
-  add(m + 1, n + 1, Q1, Q2);
-  for (int i = 0; i < (m + 1) * (n + 1); ++i)
+  for (int i = 0; i < (m + 1) * (n + 1); ++i) {
+    mpq_add(Q1[i], Q1[i], Q2[i]);
     Q[i] = mpq_get_d(Q1[i]);
+  }
   clear((m + 1) * (n + 1), Q2);
   clear((m + 1) * (n + 1), Q1);
   clear((m + 1) * (M + 1), D1);
