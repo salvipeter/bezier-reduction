@@ -11,6 +11,7 @@ using LinearAlgebra
 
 Computes a matrix Q for reducing a Bézier curve of degree `n` to degree `m`,
 while retaining the first `r` (`s`) derivatives at the 0 (1) parameter.
+It is assumed that `r + s < m < n - 1`.
 
 The new control points can be computed as `Q * P`,
 where `P` is the vector of control points.

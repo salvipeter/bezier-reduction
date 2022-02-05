@@ -10,5 +10,7 @@
 
   Q will be filled in row-major order:
     (0,0), (0,1), ..., (0,n), (1,0), (1,1), ..., (m,n)
+
+  It is assumed that r + s < m < n - 1.
  */
 void reduction_matrix(int n, int m, int r, int s, double *Q);
